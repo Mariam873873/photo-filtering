@@ -122,6 +122,35 @@ void detect(char string1[100]){
         }
     }
 }
+void blurImg()
+{
+    for (int row = 0; row < SIZE; ++row)
+    {
+        for (int coloum = 0; coloum <SIZE; ++coloum)
+        {
+            for(int rg=0; rg<3; rg++)
+            {
+                int val=0;
+                int cnt=0;
+                for (int i = 0; i <10 ; ++i)
+                {
+                    for (int j = 0; j <10 ; ++j)
+                    {
+                        if(i+row< SIZE &&j+coloum<SIZE)
+                        {
+                            val+=image[i+row][j+coloum][rg];
+                            cnt++;
+                        }
+                    }
+                }
+                image[row][coloum][rg]=val/cnt;
+            }
+
+
+        }
+    }
+
+}
 void skewRGB() {
     char n;
     std::cout << "h-Horizontally\nv-Vertically\n";
@@ -631,6 +660,9 @@ int main(){
                 "9- Enlarge Image\n"
                 "10- Shuffle Image\n"
                 "11- Shrink Image\n"
+                "12- blur image\n"
+                "13- crop image\n"
+                "14- skew image right or up\n"
                 "15- Save the image to a file\n" ;
                 "0-Exit/n";
         cin >> number;
@@ -681,6 +713,17 @@ int main(){
                 break;
             case 11:
                 void shrinkImg();
+                break;
+            
+            case 12:
+                blurImg();
+                break;
+
+            case 13:
+                int xx, yy, length, width;
+                cout << "Please enter x , y , length ,  width : ";
+                cin >> xx >> yy >> length >> width;
+                crop(imageFileName, xx, yy, length, width);
                 break;
 
 
